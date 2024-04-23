@@ -1,4 +1,4 @@
-import DemoUseView from "@/module/hook/use";
+import DemoUseView from "@/module/hook/use/useInContext";
 
 const DemoUsePage = () => <DemoUseView />;
 
