@@ -1,6 +1,13 @@
 import { useFormState } from "react-dom";
 import { AddButton } from "./use-form-status/addButton";
-import axios from "axios";
+
+
+interface IUser {
+  id: number;
+  userName: string;
+  age: number;
+}
+[];
 
 const addUser = async (previousState: IUser[], formData: FormData) => {
   await new Promise((res) => setTimeout(res, 1000));
@@ -10,13 +17,6 @@ const addUser = async (previousState: IUser[], formData: FormData) => {
   const id = previousState.length + 1;
   return [...previousState, { id, userName, age }];
 };
-
-interface IUser {
-  id: number;
-  userName: string;
-  age: number;
-}
-[];
 
 function StatefulForm({}) {
   const [users, formActionUser] = useFormState(addUser, [

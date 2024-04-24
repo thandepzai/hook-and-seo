@@ -7,6 +7,7 @@ interface IUserContext {
   setUser: React.Dispatch<React.SetStateAction<string>>;
 }
 
+
 const UserContext = createContext<IUserContext>({
   user: "",
   testIf: "",
@@ -26,6 +27,7 @@ const DemoContextWithUseView = () => {
     </UserContext.Provider>
   );
 };
+
 
 const DemoUseContextView = () => {
   // const { user } = useContext(UserContext);

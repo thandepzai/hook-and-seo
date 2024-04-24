@@ -1,7 +1,7 @@
 import { Suspense, use, useState } from "react";
 
 const fetchData = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 4000));
 
   return fetch("https://jsonplaceholder.typicode.com/todos").then((response) =>
     response.json()

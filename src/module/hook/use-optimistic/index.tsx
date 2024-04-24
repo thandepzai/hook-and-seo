@@ -9,7 +9,7 @@ interface IUser {
 [];
 
 const callAddUser = async (userName: string) => {
-  await new Promise((res) => setTimeout(res, 1000));
+  await new Promise((res) => setTimeout(res, 5000));
   if (Math.random() < 0.7) {
     throw new Error("Network error");
   }
@@ -22,14 +22,6 @@ const DemoUseOptimisticView = () => {
     { userName: "Cu Thân", sending: false, id: 1 },
   ]);
 
-  async function sendMessage(formData: FormData) {
-    const sentMessage = await callAddUser(String(formData.get("user")));
-    setUsers((users: IUser[]) => [
-      ...users,
-      { userName: sentMessage, sending: false, id: users.length + 1 },
-    ]);
-  }
-
   const [optimisticUsers, addOptimisticUser] = useOptimistic(
     users,
     (state: IUser[], newUser: string) => [
@@ -41,6 +33,14 @@ const DemoUseOptimisticView = () => {
       },
     ]
   );
+
+  async function sendMessage(formData: FormData) {
+    const sentMessage = await callAddUser(String(formData.get("user")));
+    setUsers((users: IUser[]) => [
+      ...users,
+      { userName: sentMessage, sending: false, id: users.length + 1 },
+    ]);
+  }
 
   async function formAction(formData: FormData) {
     try {
