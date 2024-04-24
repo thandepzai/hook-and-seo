@@ -1,3 +1,5 @@
-import PostsComponent from "@/module/hook/use/useInPromise";
+import DemoUseInPromiseView from "@/module/hook/use/useInPromise";
 
-export default PostsComponent;
+const DemoUseInPromisePage = () => <DemoUseInPromiseView />;
+
+export default DemoUseInPromisePage;

@@ -1,11 +1,11 @@
 import { Suspense, use, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 const fetchData = async () => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  return fetch("https://jsonplaceholder.typicode.com/todos").then((response) =>
-    response.json()
-  );
+  return fetch("https://jsonplaceholder.com/todos")
+    .then((response) => response.json())
 };
 
 const RenderData = ({ dataPromise }: { dataPromise: Promise<any> }) => {
@@ -19,7 +19,7 @@ const RenderData = ({ dataPromise }: { dataPromise: Promise<any> }) => {
     : null;
 };
 
-const DemoUseInPromiseView = () => {
+const DemoUseInPromiseErrorView = () => {
   const [dataPromise, SetDataPromise] = useState<Promise<any>>();
 
   return (
@@ -31,12 +31,14 @@ const DemoUseInPromiseView = () => {
         Fetch Data
       </button>
       {dataPromise !== undefined && (
-        <Suspense fallback={<div>Loading Data...</div>}>
-          <RenderData dataPromise={dataPromise} />
-        </Suspense>
+        <ErrorBoundary fallback={<p>⚠️Something went wrong</p>}>
+          <Suspense fallback={<div>Loading Data...</div>}>
+            <RenderData dataPromise={dataPromise} />
+          </Suspense>
+        </ErrorBoundary>
       )}
     </div>
   );
 };
 
-export default DemoUseInPromiseView;
+export default DemoUseInPromiseErrorView;
